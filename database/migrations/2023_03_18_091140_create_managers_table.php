@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('avatar')->nullable();
             $table->string('password');
+            $table->integer('national_id');
             $table->timestamp('last_active_at')->nullable();
             $table->string('city')->nullable();
             $table->timestamp('banned_at')->nullable();

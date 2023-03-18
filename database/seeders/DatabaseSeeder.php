@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Manager;
+use Database\Factories\ManagerFactory;
 use Illuminate\Database\Seeder;
 use Database\Seeders\ManagerSeeder;
 
@@ -20,6 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(ManagerSeeder::class);
+        // $this->call(ManagerSeeder::class);
+
     }
 }
