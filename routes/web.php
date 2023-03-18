@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::get('/', function () {
    // return redirect()->route('dashboard.home.index');
    return view('dashboard.home.index');
 });
+
+Route::get('managers', [ManagerController::class, 'index']);
+Route::get('managers/list', [ManagerController::class, 'getManagers'])->name('managers.list');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
