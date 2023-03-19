@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+// use DataTables;
 use App\Models\Manager;
 use Illuminate\Http\Request;
-use DataTables;
+use App\DataTables\ManagerDataTable;
+use Yajra\DataTables\Facades\DataTables;
 
 
 class ManagerController extends Controller
@@ -12,29 +14,39 @@ class ManagerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ManagerDataTable $dataTable,Request $request)
     {
 
-        return view('dashboard.manager.index');
+         if ($request->ajax()) {
+            $data = Manager::orderBy('id','DESC')->get();
+        return DataTables::of($data)
+                ->addIndexColumn()
+                ->rawColumns(['action'])
+                ->make(true);
+
+       }
+
+         return $dataTable->render('dashboard.manager.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function getManagers(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Manager::orderBy('id','DESC')->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
+    // public function getManagers(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = Manager::orderBy('id','DESC')->get();
+    //         return Datatables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function($row){
+    //                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+    //                 return $actionBtn;
+    //             })
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    //     }
+
+    // }
     public function create()
     {
         //

@@ -1,4 +1,47 @@
-<!DOCTYPE html>
+@extends('layouts.datatables')
+
+@section('table_header')
+    {{ __('Managers Table') }}
+@endsection
+
+@section('table_route')
+    "{{ route('managers.index') }}"
+@endsection
+
+@section('form_data_endpoint')
+    "{{ route('managers.create') }}"
+@endsection
+
+@section('add_endpoint')
+    "{{ route('managers.store') }}"
+@endsection
+
+@section('update_endpoint')
+    "{{ route('managers.update', '') }}"
+@endsection
+
+@section('table_columns')
+    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+    {data: 'name', name: 'name'},
+    {data: 'email', name: 'email'},
+    {data: 'national_id', name: 'national_id'},
+    {data: 'gender', name: 'gender'},
+    {data: 'birth_date', name: 'birth_date'},
+
+
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+ {{-- <!DOCTYPE html>
 <html>
 <head>
     <title>Laravel 8|7 Datatables Tutorial</title>
@@ -16,11 +59,11 @@
             <tr>
                 <th>No</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Email</th> --}}
                 {{-- <th>phone</th>
                 <th>birth_date</th> --}}
                 {{-- <th>address</th> --}}
-                <th>national_id</th>
+                {{-- <th>national_id</th>
                 <th>city</th>
                 <th>Action</th>
             </tr>
@@ -42,14 +85,14 @@
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax:  'managers/list',
-        columns: [
+        ajax:  'managers/list', --}}
+        {{-- columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
-            // {data: 'phone', name: 'phone'},
-            // {data: 'birth_date', name: 'birth_date'},
-            // {data: 'address', name: 'address'},
+            {data: 'phone', name: 'phone'},
+             {data: 'birth_date', name: 'birth_date'},
+             {data: 'address', name: 'address'},
             {data: 'national_id', name: 'national_id'},
             {data: 'city', name: 'city'},
             {
@@ -63,4 +106,4 @@
 
   });
 </script>
-</html>
+</html>  --}}

@@ -12,11 +12,20 @@ return[
     [
         // second menu in navbar
         'icon' => 'fas fa-dumbbell',
-        'route' => 'dashboard',
+        'route' => 'managers.index',
         'title' => 'Managers',
-        'active' => 'Managers.*',
+        'active' => 'managers.*',
         'badge' => 'New',
     ],
+    [
+        // second menu in navbar
+        'icon' => 'fas fa-dumbbell',
+        'route' => 'gyms.index',
+        'title' => 'Gyms',
+        'active' => 'gyms.*',
+
+    ],
+
 
 
 

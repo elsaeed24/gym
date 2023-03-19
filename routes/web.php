@@ -24,8 +24,11 @@ Route::get('/', function () {
    return view('dashboard.home.index');
 });
 
-Route::get('managers', [ManagerController::class, 'index']);
-Route::get('managers/list', [ManagerController::class, 'getManagers'])->name('managers.list');
+// Route::get('managers', [ManagerController::class, 'index'])->name('managers.index');
+// Route::get('managers/list', [ManagerController::class, 'getManagers'])->name('managers.list');
+
+Route::resource('managers', ManagerController::class);
+Route::resource('gyms', ManagerController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
