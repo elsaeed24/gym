@@ -7,58 +7,76 @@ use App\Models\Manager;
 
 class ManagersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $managers = Manager::paginate(6);
         return view('dashboard.manager.index1',compact('managers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('dashboard.manager.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $request_data = $request->validate([
+            'name'          => 'required|string|max:191',
+            'email'         => 'required|email',
+            'password'      => 'required',
+            'national_id'   => 'required|integer',
+            'gender'        => 'required',
+            'birth_date'    => 'required|date',
+            'image'         => 'nullable'
+        ]);
+
+        $request_data['password'] = bcrypt($request_data['password']);
+
+        Manager::create($request_data);
+
+        return redirect( route('manager.index') );
+
+
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+
+    public function edit(Manager $manager) {
+
+        return view('dashboard.manager.edit', compact('manager'));
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+
+
+    public function update(Request $request, Manager $manager)
     {
-        //
+        $request_data = $request->validate([
+            'name'          => 'required|string|max:191',
+            'email'         => 'required|email',
+            'password'      => 'required',
+            'national_id'   => 'required|integer',
+            'gender'        => 'required',
+            'birth_date'    => 'required|date',
+            'image'         => 'nullable'
+        ]);
+
+        $request_data['password'] = bcrypt($request_data['password']);
+
+        $manager->update($request_data);
+
+        return redirect( route('manager.index') );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
     {
         //

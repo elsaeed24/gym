@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
-@section('title','Create Manager')
+@section('title','Update Manager')
 
     @section('breadcrumb')
     @parent
     <li class="breadcrumb-item active">Managers</li>
-    <li class="breadcrumb-item active">Create Manager</li>
+    <li class="breadcrumb-item active">Update Manager</li>
     @endsection
 
 @section('content')
 
 
-<form action="{{ route('manager.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('manager.update', $manager->id) }}" method="post" enctype="multipart/form-data">
     @csrf
+    {{ method_field('PUT') }}
 
 
 {{-- @if($errors->any())
@@ -29,7 +30,7 @@
 
     <div class="form-group">
         <label for="">Manager Name</label>
-        <input type="text" @class([ 'form-control','is-invalid' => $errors->has('name')]) name="name" required value={{ old('name') }}  >
+        <input type="text" @class([ 'form-control','is-invalid' => $errors->has('name')]) name="name"  value={{ $manager->name }}  >
          @if($errors->has('name'))
         <div class="text-danger">
             {{ $errors->first('name') }}
@@ -39,7 +40,7 @@
 
     <div class="form-group">
         <label for="">Email</label>
-        <input type="email" @class([ 'form-control','is-invalid' => $errors->has('email')]) name="email" required value={{ old('email') }}  >
+        <input type="email" @class([ 'form-control','is-invalid' => $errors->has('email')]) name="email" value={{ $manager->email }}  >
          @if($errors->has('email'))
         <div class="text-danger">
             {{ $errors->first('email') }}
@@ -59,7 +60,7 @@
 
     <div class="form-group">
         <label for="">National Id</label>
-        <input type="number" @class([ 'form-control','is-invalid' => $errors->has('national_id')]) name="national_id" value={{ old('national_id') }} required >
+        <input type="number" @class([ 'form-control','is-invalid' => $errors->has('national_id')]) name="national_id" value={{ $manager->national_id }} >
          @if($errors->has('national_id'))
         <div class="text-danger">
             {{ $errors->first('national_id') }}
@@ -88,7 +89,7 @@
     <div class="form-group mb-3">
         <label for="name">Birth Date</label>
         <div>
-            <input type="date" @class([ 'form-control','is-invalid' => $errors->has('birth_date')]) name="birth_date">
+            <input type="date" @class([ 'form-control','is-invalid' => $errors->has('birth_date')]) name="birth_date" value={{ $manager->birth_date }}>
             @if($errors->has('birth_date'))
             <div class="text-danger">
                 {{ $errors->first('birth_date') }}
