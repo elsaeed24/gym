@@ -10,7 +10,14 @@
 
     <link href="{{ mix('css/main.css') }}" rel="stylesheet">
 
-    @stack('styles')
+    {{-- @stack('styles') --}}
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+
+  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -51,12 +58,64 @@
         </aside>
     </div>
 
-    <div class="content-wrapper p-4">
-        @yield('content')
-    </div>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+          <div class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1 class="m-0"> @yield('title') </h1>
+                </div>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    @section('breadcrumb')
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    @show
+
+                  </ol>
+                </div>
+              </div>
+            </div><!-- /.container-fluid -->
+          </div>
+
+          <!-- Main content -->
+          <div class="content">
+            <div class="container-fluid">
+
+             @yield('content')
+
+            </div>
+            <!-- /.container-fluid -->
+          </div>
+          <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
 </div>
 
 <script src="{{ mix('js/main.js') }}"></script>
+
+<script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+
+<script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('dist/js/demo.js')}}"></script>
 
 @stack('scripts')
 </body>

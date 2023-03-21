@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -27,8 +27,8 @@ Route::get('/', function () {
 // Route::get('managers', [ManagerController::class, 'index'])->name('managers.index');
 // Route::get('managers/list', [ManagerController::class, 'getManagers'])->name('managers.list');
 
-Route::resource('managers', ManagerController::class);
-Route::resource('gyms', ManagerController::class);
+Route::resource('manager', ManagersController::class);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
