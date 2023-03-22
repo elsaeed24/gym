@@ -35,12 +35,17 @@ class ManagersController extends Controller
             'national_id'   => 'required|integer',
             'gender'        => 'required',
             'birth_date'    => 'required|date',
-            'avatar'         => 'nullable|image'
+            'avatar'         => 'nullable|image|mimes:jpg,jpeg,png'
         ]);
 
         $request_data['password'] = bcrypt($request_data['password']);
 
          $request_data['avatar'] = $this->uploadImage($request,'avatar','Managers');
+
+        //  $request->merge([
+        //     'avatar' => $this->uploadImage($request,'avatar','Managers')
+        //   ]);
+
 
         Manager::create($request_data);
 
@@ -88,6 +93,7 @@ class ManagersController extends Controller
         }
 
         $manager->update($request_data);
+
         // Delete Old Image
         if($old_image ){
             Storage::disk('uploads')->delete($old_image);

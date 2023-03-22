@@ -30,7 +30,7 @@ Managers
               <th>ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>National Id</th>
+              <th>Avatar Image</th>
               <th>Gender</th>
               <th>Birth Date</th>
               <th>Action</th>
@@ -44,7 +44,7 @@ Managers
               <td>{{$manager->id}}</td>
               <td><a href="{{ route('manager.edit', $manager->id)}}">{{$manager->name}}</a></td>
               <td>{{$manager->email}}</td>
-              <td>{{$manager->national_id	}}</td>
+              <td><img style="width: 100px; height: 100px;" src="{{ $manager->avater }}" class="rounded mx-auto d-block alt="ahmed"></td>
               <td>{{$manager->gender}}</td>
               <td>{{$manager->birth_date}}</td>
               <td>
