@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Manager;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ManagersController extends Controller
 {
 
     public function index()
     {
-        $managers = Manager::paginate(6);
+        $managers = Manager::paginate();
         return view('dashboard.manager.index1',compact('managers'));
     }
 
@@ -23,21 +25,26 @@ class ManagersController extends Controller
 
     public function store(Request $request)
     {
+
+
+
         $request_data = $request->validate([
             'name'          => 'required|string|max:191',
-            'email'         => 'required|email',
+            'email'         => 'required|email|unique:managers,email',
             'password'      => 'required',
             'national_id'   => 'required|integer',
             'gender'        => 'required',
             'birth_date'    => 'required|date',
-            'image'         => 'nullable'
+            'avatar'         => 'nullable|image'
         ]);
 
         $request_data['password'] = bcrypt($request_data['password']);
 
+         $request_data['avatar'] = $this->uploadImage($request,'avatar','Managers');
+
         Manager::create($request_data);
 
-        return redirect( route('manager.index') );
+        return redirect()->route('manager.index');
 
 
     }
@@ -49,7 +56,8 @@ class ManagersController extends Controller
     }
 
 
-    public function edit(Manager $manager) {
+    public function edit(Manager $manager)
+    {
 
         return view('dashboard.manager.edit', compact('manager'));
 
@@ -59,26 +67,51 @@ class ManagersController extends Controller
 
     public function update(Request $request, Manager $manager)
     {
+
         $request_data = $request->validate([
             'name'          => 'required|string|max:191',
-            'email'         => 'required|email',
+            'email'         => 'required',Rule::unique('managers')->ignore($manager->id),
             'password'      => 'required',
             'national_id'   => 'required|integer',
             'gender'        => 'required',
             'birth_date'    => 'required|date',
-            'image'         => 'nullable'
+            'avatar'         => 'nullable|image'
         ]);
+
+        $old_image = $manager->avatar;
 
         $request_data['password'] = bcrypt($request_data['password']);
 
-        $manager->update($request_data);
+        $new_image = $this->uploadImage($request,'avatar','Managers');
+        if($new_image){
+            $request_data['avatar'] = $new_image ;
+        }
 
-        return redirect( route('manager.index') );
+        $manager->update($request_data);
+        // Delete Old Image
+        if($old_image ){
+            Storage::disk('uploads')->delete($old_image);
+           }
+
+
+        return redirect()->route('manager.index') ;
     }
 
-    
-    public function destroy(string $id)
+
+    public function destroy($id)
     {
-        //
+        Manager::destroy($id);
+        return redirect()->route('manager.index');
+    }
+
+    public function uploadImage(Request $request,$name,$title){
+        if(!$request->hasFile($name)){
+            return ;
+        }
+            $file= $request->file($name);
+            $path = $file->store($title,[
+                'disk' => 'uploads'
+            ]);
+            return $path;
     }
 }

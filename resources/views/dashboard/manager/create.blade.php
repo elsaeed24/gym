@@ -98,9 +98,9 @@
     </div>
 
     <div class="form-group mb-3">
-        <label for="image">Avatar Image</label>
+        <label for="">Avatar Image</label>
         <div>
-            <input type="file" name="image" @class([ 'form-control','is-invalid' => $errors->has('avatar')])" >
+            <input type="file" name="avatar" @class([ 'form-control','is-invalid' => $errors->has('avatar')]) >
             @if($errors->has('avatar'))
             <div class="text-danger">
                 {{ $errors->first('avatar') }}
