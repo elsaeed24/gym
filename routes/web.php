@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -24,10 +23,9 @@ Route::get('/', function () {
    return view('dashboard.home.index');
 });
 
-// Route::get('managers', [ManagerController::class, 'index'])->name('managers.index');
-// Route::get('managers/list', [ManagerController::class, 'getManagers'])->name('managers.list');
 
-Route::resource('manager', ManagersController::class);
+require __DIR__.'/dashboard.php';
+
 
 
 Route::get('/dashboard', function () {
@@ -39,5 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManagerRequest;
 use App\Models\Manager;
+use App\Repositories\Managers\InterfaceManagerRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -10,10 +12,19 @@ use Illuminate\Support\Facades\Storage;
 class ManagersController extends Controller
 {
 
+    protected $manager;
+
+    public function __construct(InterfaceManagerRepository $manager){
+
+        $this->manager = $manager;
+    }
+
     public function index()
     {
-        $managers = Manager::paginate();
-        return view('dashboard.manager.index1',compact('managers'));
+
+        return view('dashboard.manager.index1',[
+            'managers' => $this->manager,
+        ]);
     }
 
 
@@ -23,12 +34,14 @@ class ManagersController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ManagerRequest $request)
     {
+        $this->manager->add($request);
+
+        return redirect()->route('manager.index')->with('success', 'Manager Created');
 
 
-
-        $request_data = $request->validate([
+       /* $request_data = $request->validate([
             'name'          => 'required|string|max:191',
             'email'         => 'required|email|unique:managers,email',
             'password'      => 'required',
@@ -38,19 +51,14 @@ class ManagersController extends Controller
             'avatar'         => 'nullable|image|mimes:jpg,jpeg,png'
         ]);
 
-        $request_data['password'] = bcrypt($request_data['password']);
+        $data = $request->validated();   // validated() replace all()
 
-         $request_data['avatar'] = $this->uploadImage($request,'avatar','Managers');
+        $data['password'] = bcrypt($data['password']);
 
-        //  $request->merge([
-        //     'avatar' => $this->uploadImage($request,'avatar','Managers')
-        //   ]);
+         $data['avatar'] = uploadImage($request,'avatar','Managers');
 
 
-        Manager::create($request_data);
-
-        return redirect()->route('manager.index');
-
+        Manager::create($data);*/
 
     }
 
@@ -87,7 +95,7 @@ class ManagersController extends Controller
 
         $request_data['password'] = bcrypt($request_data['password']);
 
-        $new_image = $this->uploadImage($request,'avatar','Managers');
+        $new_image = uploadImage($request,'avatar','Managers');
         if($new_image){
             $request_data['avatar'] = $new_image ;
         }
@@ -110,14 +118,14 @@ class ManagersController extends Controller
         return redirect()->route('manager.index');
     }
 
-    public function uploadImage(Request $request,$name,$title){
-        if(!$request->hasFile($name)){
-            return ;
-        }
-            $file= $request->file($name);
-            $path = $file->store($title,[
-                'disk' => 'uploads'
-            ]);
-            return $path;
-    }
+    // public function uploadImage(Request $request,$name,$title){
+    //     if(!$request->hasFile($name)){
+    //         return ;
+    //     }
+    //         $file= $request->file($name);
+    //         $path = $file->store($title,[
+    //             'disk' => 'uploads'
+    //         ]);
+    //         return $path;
+    // }
 }

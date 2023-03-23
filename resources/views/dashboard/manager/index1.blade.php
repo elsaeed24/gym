@@ -14,6 +14,8 @@ Managers
 
 @section('content')
 
+<x-alert-type type="success"/>
+
 
 <div class="row">
     <div class="col-12">
@@ -38,8 +40,8 @@ Managers
             </tr>
             </thead>
             <tbody>
-              @if($managers->count())
-              @foreach ($managers as $manager)
+              {{-- @if($managers->count()) --}}
+              @foreach ($managers->all() as $manager)
             <tr>
               <td>{{$manager->id}}</td>
               <td><a href="{{ route('manager.edit', $manager->id)}}">{{$manager->name}}</a></td>
@@ -58,7 +60,7 @@ Managers
               </td>
             </tr>
             @endforeach
-            @endif
+            {{-- @endif --}}
             </tbody>
 
           </table>
