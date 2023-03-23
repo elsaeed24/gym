@@ -24,6 +24,7 @@ class ManagersController extends Controller
 
         return view('dashboard.manager.index1',[
             'managers' => $this->manager,
+            'count_of_managers' => $this->manager->countOfManagers()
         ]);
     }
 
@@ -78,44 +79,45 @@ class ManagersController extends Controller
 
 
 
-    public function update(Request $request, Manager $manager)
+    public function update(ManagerRequest $request, Manager $manager)
     {
+        $this->manager->update($request, $manager);
 
-        $request_data = $request->validate([
-            'name'          => 'required|string|max:191',
-            'email'         => 'required',Rule::unique('managers')->ignore($manager->id),
-            'password'      => 'required',
-            'national_id'   => 'required|integer',
-            'gender'        => 'required',
-            'birth_date'    => 'required|date',
-            'avatar'         => 'nullable|image'
-        ]);
+        return redirect()->route('manager.index')->with('info', 'Manager Updated Successfully!') ;
+    //     $request_data = $request->validate([
+    //         'name'          => 'required|string|max:191',
+    //         'email'         => 'required',Rule::unique('managers')->ignore($manager->id),
+    //         'password'      => 'required',
+    //         'national_id'   => 'required|integer',
+    //         'gender'        => 'required',
+    //         'birth_date'    => 'required|date',
+    //         'avatar'         => 'nullable|image'
+    //     ]);
 
-        $old_image = $manager->avatar;
+    //     $old_image = $manager->avatar;
 
-        $request_data['password'] = bcrypt($request_data['password']);
+    //     $request_data['password'] = bcrypt($request_data['password']);
 
-        $new_image = uploadImage($request,'avatar','Managers');
-        if($new_image){
-            $request_data['avatar'] = $new_image ;
-        }
+    //     $new_image = uploadImage($request,'avatar','Managers');
+    //     if($new_image){
+    //         $request_data['avatar'] = $new_image ;
+    //     }
 
-        $manager->update($request_data);
+    //     $manager->update($request_data);
 
-        // Delete Old Image
-        if($old_image ){
-            Storage::disk('uploads')->delete($old_image);
-           }
+    //     // Delete Old Image
+    //     if($old_image ){
+    //         Storage::disk('uploads')->delete($old_image);
+    //        }
 
 
-        return redirect()->route('manager.index') ;
     }
 
 
-    public function destroy($id)
+    public function destroy(Manager $manager)
     {
-        Manager::destroy($id);
-        return redirect()->route('manager.index');
+        $this->manager->delete($manager);
+        return redirect()->route('manager.index')->with('danger', 'Manager deleted successfully!');
     }
 
     // public function uploadImage(Request $request,$name,$title){

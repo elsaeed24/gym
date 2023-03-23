@@ -14,7 +14,10 @@ Managers
 
 @section('content')
 
+
 <x-alert-type type="success"/>
+<x-alert-type type="info"/>
+<x-alert-type type="danger"/>
 
 
 <div class="row">
@@ -40,27 +43,27 @@ Managers
             </tr>
             </thead>
             <tbody>
-              {{-- @if($managers->count()) --}}
-              @foreach ($managers->all() as $manager)
-            <tr>
-              <td>{{$manager->id}}</td>
-              <td><a href="{{ route('manager.edit', $manager->id)}}">{{$manager->name}}</a></td>
-              <td>{{$manager->email}}</td>
-              <td><img style="width: 100px; height: 100px;" src="{{ $manager->avater }}" class="rounded mx-auto d-block alt="ahmed"></td>
-              <td>{{$manager->gender}}</td>
-              <td>{{$manager->birth_date}}</td>
-              <td>
-                  <form action="{{ route('manager.destroy',$manager->id)}}" method="post">
-                      @csrf
+                @if($count_of_managers)
+                    @foreach ($managers->all() as $manager)
+                        <tr>
+                            <td>{{$manager->id}}</td>
+                            <td><a href="{{ route('manager.edit', $manager->id)}}">{{$manager->name}}</a></td>
+                            <td>{{$manager->email}}</td>
+                            <td><img style="width: 100px; height: 100px;" src="{{ $manager->avater }}" class="rounded mx-auto d-block alt="ahmed"></td>
+                            <td>{{$manager->gender}}</td>
+                            <td>{{$manager->birth_date}}</td>
+                            <td>
+                                <form action="{{ route('manager.destroy',$manager->id)}}" method="post">
+                                    @csrf
 
-                      @method('delete')
-                      <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
 
-                  </form>
-              </td>
-            </tr>
-            @endforeach
-            {{-- @endif --}}
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
 
           </table>
@@ -96,5 +99,6 @@ Managers
 
 @endpush
 
+<script src="//unpkg.com/alpinejs" defer></script>
 
 @endsection
