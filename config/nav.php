@@ -15,6 +15,15 @@ return[
         'route' => 'manager.index',
         'title' => 'Managers',
         'active' => 'manager.*',
+
+    ],
+
+    [
+        // second menu in navbar
+        'icon' => 'fas fa-dumbbell',
+        'route' => 'gyms.index',
+        'title' => 'Gyms',
+        'active' => 'gyms.*',
         'badge' => 'New',
     ],
 
