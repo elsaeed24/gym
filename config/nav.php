@@ -24,6 +24,15 @@ return[
         'route' => 'gyms.index',
         'title' => 'Gyms',
         'active' => 'gyms.*',
+
+    ],
+
+    [
+        // second menu in navbar
+        'icon' => 'fas fa-users',
+        'route' => 'couches.index',
+        'title' => 'Couches',
+        'active' => 'couches.*',
         'badge' => 'New',
     ],
 
