@@ -195,6 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ManagerServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
 

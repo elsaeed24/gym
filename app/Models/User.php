@@ -39,4 +39,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAvaterAttribute()
+    {
+        if ($this->avatar) {
+
+            return asset('uploads/' . $this->avatar);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . $this->name;
+    }
 }

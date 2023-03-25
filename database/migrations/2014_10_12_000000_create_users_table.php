@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('gender', ['male', 'female'])->default('male')->nullable();
+            $table->enum('gender', ['male', 'female'])->default('male');
             $table->date('birth_date')->nullable();
             $table->string('address')->nullable();
             $table->enum('type', ['user', 'admin', 'superadmin'])->default('user');

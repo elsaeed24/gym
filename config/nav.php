@@ -24,9 +24,16 @@ return[
         'route' => 'gyms.index',
         'title' => 'Gyms',
         'active' => 'gyms.*',
-        'badge' => 'New',
     ],
 
+    [
+    // second menu in navbar
+    'icon' => 'fas fa-dumbbell',
+    'route' => 'users.index',
+    'title' => 'Users',
+    'active' => 'users.*',
+    'badge' => 'New',
+    ]
 
 
 
