@@ -2,17 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\Couch;
 use App\Models\Gym;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class GymSeeder extends Seeder
+class CouchSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Gym::factory(1)->create();
+        Couch::factory(5)->create();
     }
 }

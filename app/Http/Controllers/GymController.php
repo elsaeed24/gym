@@ -40,7 +40,7 @@ class GymController extends Controller
 
          Gym::create($data);
 
-         return redirect()->route('gyms.index')->with('success', 'Gym Created Successfully') ;;
+         return redirect()->route('gyms.index')->with('success', 'Gym Created Successfully') ;
     }
 
     /**

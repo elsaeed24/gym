@@ -17,7 +17,7 @@
     <div class="modal-body">
         <div class="form-group">
 
-            <input type="hidden" name="old_photo" value="{{ $gym->avater }}">
+            <input type="hidden" id='photo' name="old_photo" value="{{ $gym->avater }}">
 
             <label for="">Gym name</label>
             <input type="text" class="form-control" name="name" value="{{ $gym->name }}" required>
@@ -46,11 +46,8 @@
             <input type="file" class="form-control" id="avatar" name="avatar">
         </div>
         <div class="form-group">
-            <img id="showImage" src="{{$gym->avater }}" style="width: 100px; height: 100px;">
+            <img id="showImage" src="{{ $gym->avater }}" style="width: 100px; height: 100px;">
         </div>
-
-
-
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Update</button>
