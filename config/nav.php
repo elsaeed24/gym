@@ -19,7 +19,7 @@ return[
     ],
 
     [
-        // second menu in navbar
+        // third menu in navbar
         'icon' => 'fas fa-dumbbell',
         'route' => 'gyms.index',
         'title' => 'Gyms',
@@ -28,22 +28,29 @@ return[
     ],
 
     [
-        // second menu in navbar
+        // fourth menu in navbar
         'icon' => 'fas fa-users',
         'route' => 'couches.index',
         'title' => 'Couches',
         'active' => 'couches.*',
-        'badge' => 'New',
     ],
 
     [
-    // second menu in navbar
-    'icon' => 'fas fa-dumbbell',
-    'route' => 'users.index',
-    'title' => 'Users',
-    'active' => 'users.*',
-    'badge' => 'New',
-    ]
+        // fifth menu in navbar
+        'icon' => 'fas fa-dumbbell',
+        'route' => 'users.index',
+        'title' => 'Users',
+        'active' => 'users.*',
+    ],
+
+    [
+        // sixth menu in navbar
+        'icon' => 'fas fa-dumbbell',
+        'route' => 'sessions.index',
+        'title' => 'Training Sessions',
+        'active' => 'sessions.*',
+        'badge' => 'New',
+        ],
 
 
 

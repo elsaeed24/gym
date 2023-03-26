@@ -36,4 +36,10 @@ class Manager extends Model
 
         return 'https://ui-avatars.com/api/?name=' . $this->name;
     }
+
+    public function trainingsessions() {
+
+        return $this->hasMany(TrainingSession::class, 'manager_id');
+
+    }
 }
