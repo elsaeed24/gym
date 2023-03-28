@@ -45,12 +45,21 @@ return[
 
     [
         // sixth menu in navbar
-        'icon' => 'fas fa-dumbbell',
+        'icon' => 'fas fa-calendar-check',
         'route' => 'sessions.index',
         'title' => 'Training Sessions',
         'active' => 'sessions.*',
-        'badge' => 'New',
+
         ],
+
+        [
+            // sixth menu in navbar
+            'icon' => 'fas fa-user-clock',
+            'route' => 'attendances.index',
+            'title' => 'Attendances',
+            'active' => 'attendances.*',
+            'badge' => 'New',
+            ],
 
 
 

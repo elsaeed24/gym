@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TrainingSessionRequest extends FormRequest
+class AttendanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,11 @@ class TrainingSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'required|string|max:191',
-            'starts_at'     => 'required',
-            'finishes_at'   => 'required|after:starts_at',
-            // 'day'                 =>  'in:sat, sun, mon, tue, wed, thu, fri',
-            'gym_id'          => ['required','exists:gyms,id'],
+            'user_id' =>  ['required','exists:users,id'],
+            'gym_id' =>  ['required','exists:gyms,id'],
+            'session_id' =>  ['required','exists:training_sessions,id'],
+            'attendance_time' =>  ['required'],
+            'attendance_date' =>  ['required'],
         ];
     }
 }

@@ -3,7 +3,8 @@
 @section('title')
 Training Sessions
 
-    <a class="btn btn-lg btn-primary mr-2"  href="{{ route('sessions.create') }}">Create</a>
+    <a class="modal-effect btn btn-lg btn-primary mr-2" data-effect="effect-scale"
+    data-toggle="modal" href="#exampleModal">Create</a>
 
 @endsection
 
@@ -33,8 +34,10 @@ Training Sessions
             <tr>
               <th>#</th>
               <th>Name</th>
+              {{-- <th>Day</th> --}}
               <th>Starts At</th>
               <th>Finishes At</th>
+              <th>Gym</th>
               <th>Manager</th>
               <th>Action</th>
 
@@ -47,15 +50,11 @@ Training Sessions
             <tr>
               <td>{{ $loop->iteration }}</td>
               <td><a href="{{ route('sessions.edit',$session->id) }}">{{$session->name}}</a></td>
+              {{-- <td>{{$session->day}}</td> --}}
               <td>{{$session->starts_at}}</td>
               <td>{{$session->finishes_at}}</td>
-              <td>
-                @if($session->manager !== null)
-                    {{ $session->manager->name }}
-                @else
-                    <p>no manager found</p>
-                @endif
-              </td>
+              <td>{{$session->gym->name}}</td>
+              <td>{{$session->gym->manager->name}}</td>
               <td>
                   <form action="{{ route('sessions.destroy', $session->id)}}" method="post">
                       @csrf
@@ -74,12 +73,12 @@ Training Sessions
       <!-- /.card -->
     </div>
     <!-- /.col -->
-    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Gym</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Add Session</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -88,32 +87,39 @@ Training Sessions
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Gym name</label>
+                                <label for="exampleInputEmail1">session Name</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
 
-                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Type</label>
-                            <select name="type" id="type" class="form-control" required>
+                            {{-- <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Day</label>
+                            @php
+                            $days = ['sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'];
+                        @endphp
+                        <select class="form-control form-control-md" id="day" name="day">
+                            @for($i=0; $i<count($days); $i++)
 
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="both">Both</option>
+                                <option>{{ $days[$i] }}</option>
 
-                            </select>
-                            <br>
-                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Manger Name</label>
-                            <select name="manager_id" id="manager_id" class="form-control" required>
-                                @foreach ($managers as $manager)
-                                    <option value="{{ $manager->id }}">{{ $manager->name }}</option>
-                                @endforeach
-                            </select>
+                            @endfor
+                        </select> --}}
                             <br>
 
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Cover image</label>
-                                <input type="file" class="form-control-file" id="avatar" name="avatar">
+                                <label for="exampleInputEmail1">Starts At</label>
+                                <input type="time" class="form-control" id="starts_at" name="starts_at" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Finishes At</label>
+                                <input type="time" class="form-control" id="finishes_at" name="finishes_at" required>
                             </div>
 
+                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Gym Name</label>
+                            <select name="gym_id" id="gym_id" class="form-control" required>
+                                @foreach ($gyms as $gym)
+                                    <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                                @endforeach
+                            </select>
+                            <br>
 
                         </div>
                         <div class="modal-footer">
@@ -123,9 +129,7 @@ Training Sessions
                     </form>
                 </div>
             </div>
-        </div>--}}
-
-
+        </div>
 
   </div>
   <!-- /.row -->

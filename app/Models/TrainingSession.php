@@ -12,9 +12,9 @@ class TrainingSession extends Model
 
     protected $guarded = [];
 
-    public function manager() {
 
-        return $this->belongsTo(Manager::class, 'manager_id');
-
+    public function gym()
+    {
+        return $this->belongsTo(Gym::class, 'gym_id', 'id');
     }
 }

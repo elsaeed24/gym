@@ -3,13 +3,15 @@
 namespace Database\Factories;
 
 use App\Models\Gym;
-use Carbon\Carbon;
+use App\Models\TrainingSession;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Attendance>
  */
-class TrainingSessionFactory extends Factory
+class AttendanceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,10 +23,12 @@ class TrainingSessionFactory extends Factory
         $startDate = Carbon::createFromTimeStamp($this->faker->dateTimeBetween('-1 week', '+1 week')->getTimestamp());
 
         return [
-            'name' => $this->faker->unique()->name(),
-            'starts_at' => $startDate->toDateTimeString(),
-            'finishes_at' => $startDate->addHours( $this->faker->numberBetween( 1, 4 ) ),
+
+            'attendance_time' => $startDate->toDateTimeString(),
+            'attendance_date' => $this->faker->date,
              'gym_id' => Gym::inRandomOrder()->first()->id,
+             'user_id' =>User::inRandomOrder()->first()->id,
+             'session_id' =>TrainingSession::inRandomOrder()->first()->id,
         ];
     }
 }

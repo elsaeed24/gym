@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CouchController;
 use App\Http\Controllers\GymController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,8 @@ $router->addRoute('resource','users',UserController::class);
 
 $router->addRoute('resource','couches',CouchController::class);
 $router->addRoute('resource', 'sessions', TrainingSessionController::class);
+
+$router->addRoute('resource', 'attendances', AttendanceController::class);
 
 //Route::resource('manager', ManagersController::class);
 

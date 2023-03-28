@@ -6,24 +6,18 @@ use App\Models\Manager;
 use Illuminate\Http\Request;
 use App\Models\TrainingSession;
 use App\Http\Requests\TrainingSessionRequest;
+use App\Models\Gym;
 use App\Repositories\TrainingSessions\InterfaceTrainingSessionRepository;
 
 class TrainingSessionController extends Controller
 {
 
-    protected $session;
-
-    public function __construct(InterfaceTrainingSessionRepository $session){
-
-        $this->session = $session;
-    }
 
     public function index()
     {
-        return view('dashboard.training_sessions.index',[
-            'training_sessions' => $this->session->all(),
-            'count_of_sessions' => $this->session->countOfSessions()
-            ]);
+        $training_sessions = TrainingSession::paginate();
+        $gyms = Gym::all();
+        return view('dashboard.training_sessions.index',compact('training_sessions','gyms'));
     }
 
     /**
@@ -31,9 +25,8 @@ class TrainingSessionController extends Controller
      */
     public function create()
     {
-        return view('dashboard.training_sessions.create',
-            ['managers' => Manager::all()]
-        );
+
+
     }
 
     /**
@@ -41,8 +34,9 @@ class TrainingSessionController extends Controller
      */
     public function store(TrainingSessionRequest $request)
     {
-        // dd($request->all());
-        $this->session->add($request);
+         $data = $request->validated();   // validated() replace all()
+
+         TrainingSession::create($data);
 
         return redirect()->route('sessions.index')->with('success', 'Session Created Succefully');
 
@@ -61,8 +55,8 @@ class TrainingSessionController extends Controller
      */
     public function edit(TrainingSession $session)
     {
-        $managers = Manager::all();
-        return view('dashboard.training_sessions.edit', compact('session', 'managers'));
+        $gyms = Gym::all();
+        return view('dashboard.training_sessions.edit', compact('session', 'gyms'));
     }
 
     /**
@@ -70,8 +64,10 @@ class TrainingSessionController extends Controller
      */
     public function update(TrainingSessionRequest $request, TrainingSession $session)
     {
-        $this->session->update($request, $session);
 
+        $data = $request->validated();   // validated() replace all()
+
+        $session->update($data);
         return redirect()->route('sessions.index')->with('info', 'Session Updated Successfully!') ;
     }
 
@@ -80,7 +76,7 @@ class TrainingSessionController extends Controller
      */
     public function destroy(TrainingSession $session)
     {
-        $this->session->delete($session);
+        $session->forceDelete();
         return redirect()->route('sessions.index')->with('danger', 'Session deleted successfully!');
     }
 }

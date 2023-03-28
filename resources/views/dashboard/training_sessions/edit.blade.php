@@ -25,7 +25,7 @@
             @endif
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="">Day</label>
             @php
                 $days = ['sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'];
@@ -42,7 +42,7 @@
                 {{ $errors->first('day') }}
             </div>
             @endif
-        </div>
+        </div> --}}
 
         <div class="form-group">
             <label for="">Starts At</label>
@@ -65,25 +65,25 @@
         </div>
 
         <div class="form-group">
-            <label for="">Manager</label>
-            <select class="form-control form-control-md" name="manager_id">
-                @foreach ($managers as $manager)
+            <label for="">Gym Name</label>
+            <select class="form-control form-control-md" name="gym_id">
+                @foreach ($gyms as $gym)
 
 
-                    <option value="{{ $manager->id }}" @selected($session->manager->id == $manager->id)>{{ $manager->name }}</option>
+                    <option value="{{ $gym->id }}" @selected($session->gym->id == $gym->id)>{{ $gym->name }}</option>
 
                 @endforeach
             </select>
-            @if($errors->has('manager_id'))
+            @if($errors->has('gym_id'))
                 <div class="text-danger">
-                    {{ $errors->first('manager_id') }}
+                    {{ $errors->first('gym_id') }}
                 </div>
             @endif
         </div>
 
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </div>
 
 
