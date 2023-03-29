@@ -58,8 +58,17 @@ return[
             'route' => 'attendances.index',
             'title' => 'Attendances',
             'active' => 'attendances.*',
-            'badge' => 'New',
+
             ],
+
+            [
+                // sixth menu in navbar
+                'icon' => 'far fa-circle',
+                'route' => 'packages.index',
+                'title' => 'Packages',
+                'active' => 'packages.*',
+                'badge' => 'New',
+                ],
 
 
 
