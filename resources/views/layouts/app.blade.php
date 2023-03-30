@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
+  @yield('styles')
 
 </head>
 <body class="hold-transition sidebar-mini">

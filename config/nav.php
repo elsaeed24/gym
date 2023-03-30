@@ -50,25 +50,36 @@ return[
         'title' => 'Training Sessions',
         'active' => 'sessions.*',
 
-        ],
+    ],
 
-        [
-            // sixth menu in navbar
-            'icon' => 'fas fa-user-clock',
-            'route' => 'attendances.index',
-            'title' => 'Attendances',
-            'active' => 'attendances.*',
+    [
+        // sixth menu in navbar
+        'icon' => 'fas fa-user-clock',
+        'route' => 'attendances.index',
+        'title' => 'Attendances',
+        'active' => 'attendances.*',
 
-            ],
+    ],
 
-            [
-                // sixth menu in navbar
-                'icon' => 'far fa-circle',
-                'route' => 'packages.index',
-                'title' => 'Packages',
-                'active' => 'packages.*',
-                'badge' => 'New',
-                ],
+    [
+        // sixth menu in navbar
+        'icon' => 'far fa-circle',
+        'route' => 'packages.index',
+        'title' => 'Packages',
+        'active' => 'packages.*',
+        // 'badge' => 'New',
+
+    ],
+
+    [
+        // sixth menu in navbar
+        'icon' => 'far fa-circle',
+        'route' => 'buy.package',
+        'title' => 'Buy Package For User',
+        'active' => 'buypackages.*',
+        'badge' => 'New',
+
+    ],
 
 
 

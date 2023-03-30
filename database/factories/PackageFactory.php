@@ -18,7 +18,8 @@ class PackageFactory extends Factory
     {
         return [
             "name"       => $this->faker->name,
-            "sessions_number" => $this->faker->randomNumber(2,false)
+            "sessions_number" => $this->faker->randomNumber(2,false),
+            'gym_id' => 1,
         ];
     }
 }

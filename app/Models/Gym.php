@@ -28,6 +28,10 @@ class Gym extends Model
         return $this->belongsTo(Manager::class, 'manager_id', 'id')->withDefault();
     }
 
+    public function packages() {
+        return $this->hasMany(Package::class, 'gym_id');
+    }
+
 
     public function getAvaterAttribute()
     {

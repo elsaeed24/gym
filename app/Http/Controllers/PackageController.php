@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PackageRequest;
+use App\Models\Gym;
+use App\Models\User;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use App\Http\Requests\PackageRequest;
 
 class PackageController extends Controller
 {
@@ -76,4 +78,15 @@ class PackageController extends Controller
 
        return redirect()->route('packages.index')->with('danger', 'Package deleted successfully!');
    }
+
+   public function buyPackageForUser() {
+
+        $data['packages'] = Package::all();
+        $data['users'] = User::all();
+        $data['gyms'] = Gym::all();
+        return view('dashboard.packages.buy_package')->with($data);
+
+
+   }
+
 }

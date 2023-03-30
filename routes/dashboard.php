@@ -19,7 +19,12 @@ $router->addRoute('resource','couches',CouchController::class);
 $router->addRoute('resource', 'sessions', TrainingSessionController::class);
 
 $router->addRoute('resource', 'attendances', AttendanceController::class);
+
+// buy package
+Route::get('/users/package/buy', [PackageController::class, 'buyPackageForUser'])->name('buy.package');
 $router->addRoute('resource', 'packages', PackageController::class);
+
+
 
 //Route::resource('manager', ManagersController::class);
 
